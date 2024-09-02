@@ -9,7 +9,7 @@ import { FavoritesService } from '../../services/favorites.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './details.component.html',
-  styleUrl: './details.component.css'
+  styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
   car: any;

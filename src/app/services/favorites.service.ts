@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritesService {
   private storageKey = 'favorites';
+  private favoritesSubject = new BehaviorSubject<string[]>(this.getFavorites());
 
   constructor() {}
 
@@ -18,6 +20,7 @@ export class FavoritesService {
     if (!favorites.includes(id)) {
       favorites.push(id);
       localStorage.setItem(this.storageKey, JSON.stringify(favorites));
+      this.favoritesSubject.next(favorites);
     }
   }
 
@@ -25,9 +28,14 @@ export class FavoritesService {
     let favorites = this.getFavorites();
     favorites = favorites.filter(favoriteId => favoriteId !== id);
     localStorage.setItem(this.storageKey, JSON.stringify(favorites));
+    this.favoritesSubject.next(favorites);
   }
 
   isFavorite(id: string): boolean {
     return this.getFavorites().includes(id);
+  }
+
+  getFavoritesObservable() {
+    return this.favoritesSubject.asObservable();
   }
 }
