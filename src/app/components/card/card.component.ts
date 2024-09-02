@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
+  @Input() car: any;
 
+  constructor(private router: Router) {}
+
+  verMais() {
+    this.router.navigate(['/details', this.car.id]);
+  }
 }
