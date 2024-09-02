@@ -1,1 +1,10 @@
-<p>details works!</p>
+<div class="details" *ngIf="car">
+    <h2>{{ car.name }}</h2>
+    <img [src]="car.image" alt="{{ car.name }}">
+    <p><strong>Ano:</strong> {{ car.year }}</p>
+    <p><strong>Tipo:</strong> {{ car.type }}</p>
+    <p><strong>Preço por Dia:</strong> R$ {{ car.pricePerDay }}</p>
+    <p><strong>Descrição:</strong> {{ car.description }}</p>
+    <button>Alugar</button>
+  </div>
+  
